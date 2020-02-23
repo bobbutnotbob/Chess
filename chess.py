@@ -12,21 +12,22 @@ def render_images():
 
             render = ImageTk.PhotoImage(load)
             images.append(render)
-    load = Image.open('./chessboard.jpg')
-    background_img = ImageTk.PhotoImage(load)
-    return images, background_img
+    return images
 
 
 def main():
     root = tk.Tk()
 
-    pieces, bg_img = render_images()
+    pieces = render_images()
+    chessboard = []
     black_pieces = []
     white_pieces = []
 
-    # Create Chessboard
-    background_label = tk.Label(root, image=bg_img)
-    background_label.place(x=0, y=0, relwidth=1, relheight=1)
+    # Setup board
+    for row in range(4):
+        for column in range(8):
+            chessboard.append(tk.Button(root, image=pieces[12], height=60, width=60, bd=0))
+            chessboard[(row * 8) + column].grid(row=row+2, column=column)
 
     # Setup pawns
     for pawn in range(8):
